@@ -21,7 +21,9 @@ class Home extends Front
     //end meta seo
     $data = [
       'news' => $this->model->news()->result(),
-      'headline_news' => $this->model->headline_news()
+      'donatur' => $this->model->donatur(),
+      'foto' => $this->model->foto(),
+      'video' => $this->model->video()
     ];
     $this->template->view('home/index', $data);
   }

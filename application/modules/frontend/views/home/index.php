@@ -36,11 +36,154 @@
     </section>
 
 
-		<section class="container py-5">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-8 pt-3 text-center">
-          <p class="text-muted" style="font-size:16px!important">Muliakan Hafidz Quran adalah program pemberian beasiswa kepada santri penghafal al quran yang ada di [............] . Santri penghafal Al Quran mendapat pendampingan dan pembinaan langsung dari da’i atau guru mengaji yang sudah terjamin kualitas pengajarannya.</p>
+
+
+    <section class="container pb-4 mb-5 pt-5">
+      <div class="row">
+        <!-- Top Sellers-->
+        <div class="col-md-6 col-sm-6">
+          <div class="widget widget-featured-products">
+            <h3 class="widget-title">Donatur</h3>
+            <?php foreach ($donatur as $donaturs): ?>
+              <?php $nama = $donaturs->nama; ?>
+              <a class="featured-product">
+                <div class="featured-product-thumb">
+                  <img src="<?=img_alpha($nama)?>" alt="Product Image">
+                </div>
+                <div class="featured-product-info">
+                  <h5 class="featured-product-title"><?=($donaturs->is_anonim=="1")?"Hamba Allah":"$nama"?></h5>
+                  <span class="featured-product-price">
+                    &nbsp;<?=$donaturs->name?>
+                  </span>
+                  <span class="featured-product-price">
+                    &nbsp;Rp.<?=$donaturs->donasi?>
+                  </span>
+                </div>
+              </a>
+            <?php endforeach; ?>
+
+          </div>
+        </div>
+
+
+
+        <div class="col-md-6 col-sm-6">
+          <div class="widget widget-featured-products">
+            <h3 class="widget-title">Donasi Ke</h3>
+            <a class="featured-product" href="shop-single.html">
+              <div class="featured-product-thumb" style="width:180px!important">
+                <img src="https://localhost/idea-donasi-ambulans/template/images/bank/blog_5dd50ecf246724_79179282.png" style="box-shadow:none!important" alt="Product Image">
+              </div>
+              <div class="featured-product-info">
+                <h5 class="featured-product-title">BANK BRI</h5>
+                <span class="featured-product-price">
+                  &nbsp;IDEA DIGITAL INDONESIA
+                </span>
+                <span class="featured-product-price">
+                  &nbsp;NO.REK 0333000303
+                </span>
+              </div>
+            </a>
+
+            <a class="featured-product" href="shop-single.html">
+              <div class="featured-product-thumb" style="width:180px!important;">
+                <img src="https://localhost/idea-donasi-ambulans/template/images/bank/mandiri.png" style="box-shadow:none!important" alt="Product Image">
+              </div>
+              <div class="featured-product-info">
+                <h5 class="featured-product-title">BANK MANDIRI</h5>
+                <span class="featured-product-price">
+                  &nbsp;IDEA DIGITAL INDONESIA
+                </span>
+                <span class="featured-product-price">
+                  &nbsp;NO.REK 0333000303
+                </span>
+              </div>
+            </a>
+
+
+          </div>
         </div>
       </div>
-      <hr class="mt-5">
+
+    </section>
+
+
+    <section class="bg-center-top bg-no-repeat bg-cover pb-4 mb-5" style="background-image: url(<?=base_url()?>temp/frontend/img/homepages/mobile-app-showcase/cta-bg.jpg);">
+      <div class="container py-5 text-center">
+        <div class="row justify-content-center pt-3">
+          <div class="col-xl-7 col-lg-8 col-md-10">
+            <p class="text-white opacity-20" style="font-size:18px;">
+              Muliakan Hafidz Quran adalah program pemberian beasiswa kepada santri penghafal Al-Quran yang ada di [............] . Santri penghafal Al-Quran mendapat pendampingan dan pembinaan langsung dari da’i atau guru mengaji yang sudah terjamin kualitas pengajarannya.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="container pb-4 mb-2">
+      <div class="row">
+        <!-- Top Sellers-->
+        <div class="col-md-5 col-sm-6">
+          <div class="widget widget-featured-products">
+            <h3 class="widget-title">Foto Terbaru</h3>
+            <div class="d-flex justify-content-between mb-3">
+              <?php foreach ($foto as $fotos): ?>
+                <a class="gallery-item mb-2 mr-2" href="<?=base_url()?>temp/img_manager/media_foto/<?=$fotos->image?>" data-fancybox="gallery1" data-options="{&quot;caption&quot;: &quot;<?=$fotos->image_name?>&quot;}">
+                  <img src="<?=base_url()?>temp/img_manager/media_foto/thumbs/<?=$fotos->image?>" alt="Gallery Image" style="height:100%">
+                </a>
+              <?php endforeach; ?>
+
+            </div>
+
+            <h3 class="widget-title">Video Terbaru</h3>
+            <div class="d-flex justify-content-between">
+              <?php foreach ($video as $videos): ?>
+                <?php $image_yt = explode("=",$videos->url) ?>
+                <a class="gallery-item type-video mb-2" href="<?=$videos->url?>&amp;amp;autoplay=1&amp;amp;rel=0&amp;amp;controls=0&amp;amp;showinfo=0" data-options="{&quot;caption&quot;: &quot;<?=$videos->judul?>&quot;}" data-fancybox="single" data-width="1000" data-height="563">
+                  <img src="http://i3.ytimg.com/vi/<?=$image_yt[1]?>/hqdefault.jpg" alt="Gallery Image">
+                </a>
+              <?php endforeach; ?>
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="col-md-7 col-sm-6">
+          <div class="widget widget-featured-posts">
+              <h4 class="widget-title">Artikel Terbaru</h4>
+              <?php foreach ($news as $artikel): ?>
+                <a class="featured-post" href="<?=site_url("news/detail/".$artikel->id_news."/".$artikel->slug)?>">
+                  <div class="featured-post-thumb">
+                    <?php if ($artikel->image==""): ?>
+                      <img src="<?=base_url()?>temp/img_manager/default.png" alt="Post Thumbnail">
+                      <?php else: ?>
+                        <img src="<?=base_url()?>temp/img_manager/news/thumbs/<?=$artikel->image?>" alt="Post Thumbnail">
+                    <?php endif; ?>
+                  </div>
+                  <div class="featured-post-info">
+                    <div class="featured-post-meta">
+                      <span class="text-primary opacity-70"><i class="fe-icon-clock"></i><?=date("d/m/Y",strtotime($artikel->created_at))?></span>
+                      <span class="ml-3"><i class="fe-icon-link"></i><?=$artikel->category?></span>
+                    </div>
+                    <div class="featured-post-title"><?=ucfirst($artikel->title)?>.</div>
+                  </div>
+                </a>
+              <?php endforeach; ?>
+            </div>
+
+
+            <div class="text-center">
+              <?php $cat = $this->db->get_where("category",["delete"=>"0"]) ?>
+              <?php foreach ($cat->result() as $category): ?>
+                <a class="tag-link" href="#"><?=$category->category?></a>
+              <?php endforeach; ?>
+              </div>
+            </div>
+
+        </div>
+
+      </div>
     </section>

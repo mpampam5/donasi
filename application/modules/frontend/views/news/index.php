@@ -1,24 +1,27 @@
-<section class="hero hero-game" style="background-image: url('<?= base_url() ?>temp/front/banner-news.jpg');">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="hero-block text-center">
-      <div class="hero-center">
-        <h2 class="hero-title">ARTICLE</h2>
+<section class="page-title d-flex pt-5" aria-label="Page title" style="background-image: url(<?= base_url() ?>temp/frontend/img/page-title/blog-pattern.jpg);">
+      <div class="container text-left align-self-center pt-5 mt-5">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Beranda</a>
+            </li>
+            <li class="breadcrumb-item"><a href="#">Artikel</a>
+            </li>
+          </ol>
+        </nav>
+        <h1 class="page-title-heading">Artikel</h1>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section>
-  <div class="container bg-secondary">
+<section class="container pb-5 mb-3">
+
     <div class="row">
-      <div class="col-lg-8 m-t-20">
+      <div class="col-lg-9 m-t-20">
         <!-- post -->
-        <div id="content-post"></div>
+        <div id="content-post" class="widget widget-featured-posts"></div>
 
 
-        <div class="pagination-results m-t-30">
-          <nav aria-label="Page navigation" id="navigation"></nav>
+        <div class="pagination-results mt-5">
+          <nav class="pagination justify-content-center" id="navigation"></nav>
         </div>
 
       </div>
@@ -27,17 +30,9 @@
 
 
       <!-- sidebar -->
-      <div class="col-lg-4 m-t-20">
+      <div class="col-lg-3 m-t-20">
         <div class="sidebar">
-          <!-- widget search -->
-          <div class="widget widget-search">
-            <form>
-              <div class="form-group input-icon-right">
-                <i class="fa fa-search"></i>
-                <input type="text" class="form-control" placeholder="search article...">
-              </div>
-            </form>
-          </div>
+
 
 
           <!-- widget tags -->
@@ -45,7 +40,7 @@
             <h5 class="widget-title">Category</h5>
             <div class="post-tags">
               <?php foreach ($cat as $cats) : ?>
-                <a href="#" class="text-warning"><i class="fa fa-tags"></i> <?= $cats->category ?></a>
+                <a href="#" class="tag-link"><?= $cats->category ?></a>
               <?php endforeach; ?>
             </div>
           </div>
@@ -58,7 +53,7 @@
         </div>
       </div>
     </div>
-  </div>
+
 </section>
 
 
@@ -72,8 +67,8 @@
         dataType: "json",
         success: function(data) {
           $('#navigation ul li a').addClass('page-link');
-          $('#content-post').html(data.data);
-          $('#navigation').fadeIn(1000).html(data.pagination_link);
+          $('#content-post').hide().fadeIn(300).html(data.data);
+          $('#navigation').hide().fadeIn(300).html(data.pagination_link);
         }
       });
     }

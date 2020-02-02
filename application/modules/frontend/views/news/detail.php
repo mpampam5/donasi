@@ -1,13 +1,16 @@
-<section class="hero hero-game" style="background-image: url('<?=base_url()?>temp/front/banner-news.jpg');">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="hero-block text-center">
-        <div class="hero-center">
-          <h2 class="hero-title">ARTICLE - DETAIL</h2>
-        </div>
+<section class="page-title d-flex pt-5" aria-label="Page title" style="background-image: url(<?= base_url() ?>temp/frontend/img/page-title/blog-pattern.jpg);">
+      <div class="container text-left align-self-center pt-5 mt-5">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Beranda</a>
+            </li>
+            <li class="breadcrumb-item"><a href="#">Detail Artikel</a>
+            </li>
+          </ol>
+        </nav>
+        <h1 class="page-title-heading">Detail Artikel</h1>
       </div>
-    </div>
-  </section>
+    </section>
 
 <section class="col-lg-10 mx-auto">
     <div class="container">
@@ -49,20 +52,9 @@
             <div class="post-tags">
               <a href="#"><i class="fa fa-tags"></i> <?=$news->category?></a>
             </div>
-            <div class="social-share">
-              <a class="btn btn-social btn-facebook btn-circle" id="facebook" href="https://www.facebook.com/sharer.php?u=<?=base_url("news/detail/$news->id_news/$news->slug")?>" data-toggle="tooltip" title="Share on Facebook" data-placement="bottom" role="button"><i class="fa fa-facebook"></i></a>
-              <a class="btn btn-social btn-twitter btn-circle" id="twitter" href="https://twitter.com/intent/tweet?url=<?=base_url("news/detail/$news->id_news/$news->slug")?>" data-toggle="tooltip" title="Share on Twitter" data-placement="bottom" role="button"><i class="fa fa-twitter"></i></a>
-              <a class="btn btn-social btn-whatsapp btn-circle" id="whatsapp" href="https://wa.me/?text=<?=base_url("news/detail/$news->id_news/$news->slug")?>" data-toggle="tooltip" title="Share on Whatsapp" data-placement="bottom" role="button"><i class="fa fa-whatsapp"></i></a>
-            </div>
           </div>
 
 
-          <div class="post-related">
-            <h6 class="subtitle">Other Articles</h6>
-            <div class="row">
-              <?=other_article($news->id_news)?>
-            </div>
-          </div>
 
         </div>
       </div>

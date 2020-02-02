@@ -24,6 +24,9 @@
     <link rel="stylesheet" media="screen" href="<?=base_url()?>temp/frontend/css/theme.min.css">
     <!-- Modernizr-->
     <script src="<?=base_url()?>temp/frontend/js/modernizr.min.js"></script>
+
+    <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
+    <script src="<?=base_url()?>temp/frontend/js/vendor.min.js"></script>
   </head>
   <!-- Body-->
   <body>

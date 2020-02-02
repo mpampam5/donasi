@@ -22,18 +22,14 @@ function widget_video($title, $limit)
     $str = '<div class="widget widget-video">
               <h5 class="widget-title">' . $title . '</h5>';
     foreach ($query->result() as $news) {
-      $image = substr($news->url, -11);
+      $image_yt = explode("=",$news->url);
       $str .= '
-                            <div class="widget-img">
-                              <a href="' . site_url("video/$news->id/$news->slug") . '"><img src="https://i1.ytimg.com/vi/' . $image . '/mqdefault.jpg" alt=""></a>
-                              <a class="video-play-icon" href="blog-post-video.html">
-                              <i class="fa fa-play"></i>
-                            </div>
-                            <h4><a href="' . site_url("video/$news->id/$news->slug") . '" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="' . $news->judul . '">' . substr($news->judul, 0, 70) . '...</a></h4>
-                            <span><i class="fa fa-clock-o"></i> ' . date('d/m/Y', strtotime($news->created_at)) . '</span>';
+      <a class="gallery-item type-video mb-2" href="'.$news->url.'&amp;amp;autoplay=1&amp;amp;rel=0&amp;amp;controls=0&amp;amp;showinfo=0" data-options="{&quot;caption&quot;: &quot;'.$news->judul.'&quot;}" data-fancybox="single" data-width="1000" data-height="563">
+        <img src="http://i3.ytimg.com/vi/'.$image_yt[1].'/hqdefault.jpg" alt="Gallery Image">
+      </a>';
     }
 
-    $str .= '</div>';
+
 
     return $str;
   }
@@ -133,4 +129,11 @@ function other_article($id)
   }
 
   return $str;
+}
+
+function img_alpha($str)
+{
+  $img = strtolower($str);
+  $imgs = substr($img,0,1);
+  return base_url()."temp/icon-alpha/$imgs.ico";
 }

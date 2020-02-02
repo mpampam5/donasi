@@ -12,7 +12,7 @@ class news extends Front
 
   function index()
   {
-    $this->template->set_title('Article | ' . setting('title'));
+    $this->template->set_title('Artikel | ' . setting('title'));
     //meta seo
     $this->meta_tags->set_meta_tag('description', setting('title') . ' ' . setting('alamat'));
     // *$this->meta_tags->unset_meta_tag('author');
@@ -28,28 +28,30 @@ class news extends Front
 
   function json_pagination()
   {
+
+
     $this->load->library("pagination");
     $config = array();
     $config["base_url"] = "#";
     $config["total_rows"] = $this->model->news_total_count();
-    $config["per_page"] = 6;
+    $config["per_page"] =6;
     $config["uri_segment"] = 3;
     $config["use_page_numbers"] = TRUE;
-    $config["full_tag_open"] = '<ul class="pagination">';
+    $config["full_tag_open"] = '<ul class="pages">';
     $config["full_tag_close"] = '</ul>';
-    $config["first_tag_open"] = '<li class="page-item">';
+    $config["first_tag_open"] = '<li class="d-none d-sm-inline-block">';
     $config["first_tag_close"] = '</li>';
-    $config["last_tag_open"] = '<li class="page-item">';
+    $config["last_tag_open"] = '<li class="d-none d-sm-inline-block">';
     $config["last_tag_close"] = '</li>';
-    $config['next_link'] = 'next';
-    $config["next_tag_open"] = '<li class="page-item">';
+    $config['next_link'] = '&nbsp;>>&nbsp;';
+    $config["next_tag_open"] = '<li class="d-none d-sm-inline-block">';
     $config["next_tag_close"] = '</li>';
-    $config["prev_link"] = "prev";
-    $config["prev_tag_open"] = "<li class='page-item'>";
+    $config["prev_link"] = "&nbsp;<<&nbsp;";
+    $config["prev_tag_open"] = "<li class='d-none d-sm-inline-block'>";
     $config["prev_tag_close"] = "</li>";
-    $config["cur_tag_open"] = '<li class="page-item active"><a href="#">';
+    $config["cur_tag_open"] = '<li class="d-none d-sm-inline-block active"><a href="#">';
     $config["cur_tag_close"] = "</a></li>";
-    $config["num_tag_open"] = "<li class='page-item'>";
+    $config["num_tag_open"] = "<li class='d-none d-sm-inline-block'>";
     $config["num_tag_close"] = "</li>";
     $config["num_links"] = 1;
     $this->pagination->initialize($config);

@@ -66,24 +66,39 @@ class News_model extends CI_Model
         $image_post = base_url("temp/default.png");
       }
 
+      // $output .='<a class="featured-post" href="blog-single-gallery.html">
+      //             <div class="featured-post-thumb" style="min-width:200px;!important">
+      //                 <img src="'.$image_post.'" alt="Post Thumbnail">
+      //             </div>
+      //             <div class="featured-post-info">
+      //               <div class="featured-post-meta">
+      //                 <span class="text-primary opacity-70"><i class="fe-icon-clock"></i>'.date("d/m/Y",strtotime($row->created_at)).'</span>
+      //                 <span class="ml-3"><i class="fe-icon-link"></i>'.$row->category.'</span>
+      //               </div>
+      //               <div class="featured-post-title" style="font-size:16px;font-weight:bold">'.ucfirst($row->title).'</div>
+      //             </div>
+      //           </a>';
 
-      $output .= '<div class="post post-md">
-                   <div class="post-thumbnail">
-                     <a href="' . site_url("news/detail/$row->id_news/$row->slug") . '">
-                     <div class="image-post" style="background:url(' . $image_post . ')"></div>
-                     </a>
-                   </div>
-                   <div class="post-block">
-                     <h2 class="post-title"><a href="' . site_url("news/detail/$row->id_news/$row->slug") . '" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="' . $row->title . '">' . substr($row->title, 0, 85) . '</a></h2>
-                     <div class="post-meta">
-                     <span><i class="fa fa-clock-o"></i> ' . date('d M Y', strtotime($row->created_at)) . '</span>
-                     <span><i class="fa fa-tags"></i> ' . $row->category . '</span>
-                     <span><i class="fa fa-user"></i> Admin</a></span>
-                     </div>
-                     ' . substr(strip_tags($row->description), 0, 100) . '<a href="' . site_url("news/detail/$row->id_news/$row->slug") . '" class="text-warning">[Read More]</a>
-                   </div>
-                 </div>';
+
+      $output .='<div class="card blog-card mb-3">
+                  <div class="card-body">
+                    <h5 class="post-title"><a href="'.site_url("news/detail/".$row->id_news."/".$row->slug).'">'.ucfirst($row->title).'</a></h5>
+                    <p class="text-muted">'.substr($row->description,0,200).'
+                      <a href="'.site_url("news/detail/".$row->id_news."/".$row->slug).'" class="text-primary">[Baca Selengkapnya]</a>
+                    </p>
+                  </div>
+                  <div class="card-footer">
+                    <div class="post-meta">
+                    <a href="blog-single-audio.html#comments">
+                    <i class="fe-icon-link"></i>'.$row->category.'
+                    </a>
+                    <span><i class="fe-icon-clock"></i>'.date("d/m/Y",strtotime($row->created_at)).'</div>
+                  </div>
+                </div>';
+
     }
+
+
 
     return $output;
   }
