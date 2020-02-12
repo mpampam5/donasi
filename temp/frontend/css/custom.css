@@ -1,0 +1,7 @@
+.img-post{
+  background-size: 100%!important;
+    background-position: 50% 50%;
+    background-repeat: no-repeat!important;
+  width: 100%;
+  min-height: 600px;
+}

@@ -46,7 +46,7 @@ class Pengaturan extends Backend
       $this->form_validation->set_rules("domain", "Domain", "trim|required|xss_clean|max_length[150]");
       $this->form_validation->set_rules("telepon", "Telepon", "trim|required|xss_clean");
       $this->form_validation->set_rules("alamat", "alamat", "trim|xss_clean");
-      $this->form_validation->set_rules("whatsapp", "whatsapp", "trim|required|xss_clean");
+      $this->form_validation->set_rules("whatsappp", "whatsapp", "trim|required|xss_clean");
       $this->form_validation->set_error_delimiters('<small class="form-text"><b class="text-danger">', '</b></small>');
 
       if ($this->form_validation->run()) {
@@ -55,7 +55,7 @@ class Pengaturan extends Backend
           "domain" => $this->input->post("domain", true),
           "telepon" => $this->input->post("telepon", true),
           "alamat" => $this->input->post("alamat", true),
-          "whatsapp" => $this->input->post("whatsapp", true)
+          "whatsapp" => $this->input->post("whatsappp", true)
         ];
         $this->model->get_update($this->table, $update, ["id" => 999]);
 

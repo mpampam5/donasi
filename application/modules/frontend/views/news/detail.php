@@ -8,55 +8,47 @@
             </li>
           </ol>
         </nav>
-        <h1 class="page-title-heading">Detail Artikel</h1>
+        <!-- <h1 class="page-title-heading">Detail Artikel</h1> -->
       </div>
     </section>
 
-<section class="col-lg-10 mx-auto">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-1 hidden-md-down">
-          <!-- widget share -->
-          <div class="widget widget-share" data-fixed="widget">
-            <div class="widget-block">
-              <a class="btn btn-social btn-facebook btn-circle" id="facebook" href="https://www.facebook.com/sharer.php?u=<?=base_url("news/detail/$news->id_news/$news->slug")?>" data-toggle="tooltip" title="Share on Facebook" data-placement="bottom" role="button"><i class="fa fa-facebook"></i></a>
-              <a class="btn btn-social btn-twitter btn-circle" id="twitter" href="https://twitter.com/intent/tweet?url=<?=base_url("news/detail/$news->id_news/$news->slug")?>" data-toggle="tooltip" title="Share on Twitter" data-placement="bottom" role="button"><i class="fa fa-twitter"></i></a>
-              <a class="btn btn-social btn-whatsapp btn-circle" id="whatsapp" href="https://wa.me/?text=<?=base_url("news/detail/$news->id_news/$news->slug")?>" data-toggle="tooltip" title="Share on Whatsapp" data-placement="bottom" role="button"><i class="fa fa-whatsapp"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-10">
-          <!-- post -->
-          <div class="post post-single">
-            <h2 class="post-title"><?=$news->title?></h2>
-            <div class="post-meta">
-              <span><i class="fa fa-clock-o"></i> <?=date('d/m/Y',strtotime($news->created_at))?></span>
-              <span><i class="fa fa-user"></i> Admin</span>
-              <span><a href=""><i class="fa fa-tags"></i> <?=$news->category?></a></span>
-              <!-- <span><a href="#comments"><i class="fa fa-comment-o"></i> 98 comments</a></span> -->
-            </div>
-
-            <?php if ($news->image!=""): ?>
-              <div class="post-thumbnail">
-                <a href="<?=base_url("temp/img_manager/news/$news->image")?>" data-fancybox="gallery">
-                  <div class="image-post-detail" style='background:url(<?=base_url("temp/img_manager/news/$news->image")?>)'></div>
-                </a>
+    <div class="container pb-5 mb-3">
+          <div class="row">
+            <!-- Post Content-->
+            <div class="col-lg-9 mx-auto">
+              <!-- Single Post Meta-->
+              <h4><?=ucfirst($news->title)?></h4>
+              <div class="d-flex justify-content-between align-items-center pb-3">
+                <div class="post-meta">
+                  <a class="scroll-to text-sm" href="#"><i class="fe-icon-link"></i><?=$news->category?></a>
+                  <span class="text-sm"><i class="fe-icon-clock"></i><?=date('d/m/Y',strtotime($news->created_at))?></span></div>
               </div>
-            <?php endif; ?>
+              <hr class="mb-4">
+              <!-- Carousel-->
+              <?php if ($news->image!=""): ?>
+                  <a href="<?=base_url("temp/img_manager/news/$news->image")?>" data-fancybox="gallery">
+                    <!-- <div class="img-post"  style='background:url(<?=base_url("temp/img_manager/news/$news->image")?>);'></div> -->
+                    <img src="<?=base_url("temp/img_manager/news/$news->image")?>" alt="" width="100%">
+                  </a>
+                <hr class="mb-4">
+              <?php endif; ?>
+              <div class="pb-4">
+                <?=$news->description?>
+              </div>
 
-            <div class="text-justify">
-              <?=$news->description?>
+
+              <div class="d-sm-flex justify-content-between align-items-center border-top border-bottom mb-5 py-2">
+                <div class="py-2">
+                  <span class="dinline-block align-middle py-2 mr-2"><strong>Share:</strong></span>
+                    <a class="social-btn sb-style-3 sb-facebook mb-0" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><i class="socicon-facebook"></i></a>
+                    <a class="social-btn sb-style-3 sb-twitter mb-0" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><i class="socicon-twitter"></i></a>
+                    <a class="social-btn sb-style-3 sb-pinterest mb-0" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest"><i class="socicon-pinterest"></i></a>
+                </div>
+              </div>
+
+              <!-- Entry Nanigation-->
+
             </div>
+
           </div>
-          <div class="post-actions">
-            <div class="post-tags">
-              <a href="#"><i class="fa fa-tags"></i> <?=$news->category?></a>
-            </div>
-          </div>
-
-
-
         </div>
-      </div>
-    </div>
-  </section>

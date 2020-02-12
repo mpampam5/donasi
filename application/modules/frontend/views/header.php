@@ -22,6 +22,8 @@
     <link rel="stylesheet" media="screen" href="<?=base_url()?>temp/frontend/css/vendor.min.css">
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="<?=base_url()?>temp/frontend/css/theme.min.css">
+
+    <link rel="stylesheet" media="screen" href="<?=base_url()?>temp/frontend/css/custom.css">
     <!-- Modernizr-->
     <script src="<?=base_url()?>temp/frontend/js/modernizr.min.js"></script>
 

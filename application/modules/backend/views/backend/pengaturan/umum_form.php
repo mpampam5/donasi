@@ -23,7 +23,7 @@
 
       <div class="form-group">
         <label for="">Whatsapp</label>
-        <input type="text" class="form-control" name="whatsapp" id="whatsapp" placeholder="Whatsapp" value="<?= $whatsapp ?>">
+        <input type="text" class="form-control" name="whatsappp" id="whatsappp" placeholder="Whatsapp" value="<?= $whatsapp ?>">
       </div>
 
       <div>
