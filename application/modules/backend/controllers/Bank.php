@@ -26,6 +26,7 @@ class Bank extends Backend{
 		$this->form_validation->set_rules("bank","Bank","trim|xss_clean|max_length[255]|required");
 		$this->form_validation->set_rules("no_rek","No.Rekening","trim|xss_clean|max_length[255]|required|numeric");
 		$this->form_validation->set_rules("nama_rek","Nama Rek","trim|xss_clean|max_length[255]|required");
+		$this->form_validation->set_rules("image","Gambar","trim|xss_clean|max_length[255]");
 		$this->form_validation->set_error_delimiters('<p class="form-text text-danger">','</p>');
 	}
 
@@ -52,6 +53,7 @@ class Bank extends Backend{
 									'bank'	=>	$row->bank,
 									'no_rek'	=>	$row->no_rek,
 									'nama_rek'	=>	$row->nama_rek,
+									'image'	=>	$row->image,
 								];
       $this->temp_backend->view('content/bank/detail',$data);
     }else {
@@ -68,7 +70,8 @@ function add()
                 'action' => site_url('backend/bank/add_action'),
 								'bank'	=>	set_value('bank'),
 								'no_rek'	=>	set_value('no_rek'),
-								'nama_rek'	=>	set_value('nama_rek')
+								'nama_rek'	=>	set_value('nama_rek'),
+								'image'	=>	set_value('image')
 							];
 
     $this->temp_backend->view('content/bank/form',$data);
@@ -85,6 +88,7 @@ function add_action()
 										'bank'	=>	strtoupper($this->input->post('bank',true)),
 										'no_rek'	=>	$this->input->post('no_rek',true),
 										'nama_rek'	=>	$this->input->post('nama_rek',true),
+										'image'	=>	$this->input->post('image',true),
 									];
 
         if ($this->model->get_insert($this->table,$insert)) {
@@ -121,6 +125,7 @@ function update($id)
 								'bank'	=>	set_value('bank',$row->bank),
 								'no_rek'	=>	set_value('no_rek',$row->no_rek),
 								'nama_rek'	=>	set_value('nama_rek',$row->nama_rek),
+								'image'	=>	set_value('image',$row->image),
 							];
 
     $this->temp_backend->view('content/bank/form',$data);
@@ -140,6 +145,7 @@ function update_action($id)
 										'bank'	=>	$this->input->post('bank',true),
 										'no_rek'	=>	$this->input->post('no_rek',true),
 										'nama_rek'	=>	$this->input->post('nama_rek',true),
+										'image'	=>	$this->input->post('image',true),
 									];
 
         if ($this->model->get_update($this->table,$update,["id_rek"=>$id])) {

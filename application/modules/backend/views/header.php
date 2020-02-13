@@ -36,8 +36,9 @@
           <div class="navbar-left">
             <!-- <a class="navbar-toggle"><i class="fa fa-bars"></i></a> <img src="<?=config_item('sty_back')?>img/logo.png" alt="logo">-->
             <!-- <div class="logo-img"  style='background-image:url(<?=base_url()?>temp/backend/logo/<?=setting('logo')?>)'></div> -->
-            <img id="img_logo" src="<?=base_url()?>temp/logo.png" alt="" style="height:50px;width:130px;margin-right:10px;">
+            <!-- <img id="img_logo" src="<?=base_url()?>temp/logo.png" alt="" style="height:50px;width:130px;margin-right:10px;"> -->
             <!-- <a href="#" class="logo"> <h1 class="text-logo"><?=setting('title')?></h1></a> -->
+            <h1 style="padding-top:10px;"><?=strtoupper(setting('title'))?></h1>
           </div>
 
 

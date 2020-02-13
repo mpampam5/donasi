@@ -1,70 +1,4 @@
-<script>
-(function(w,d,s,g,js,fs){
-  g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
-  js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
-  js.src='https://apis.google.com/js/platform.js';
-  fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
-}(window,document,'script'));
-</script>
-<script>
 
-gapi.analytics.ready(function() {
-
-  /**
-   * Authorize the user immediately if the user has already granted access.
-   * If no access has been created, render an authorize button inside the
-   * element with the ID "embed-api-auth-container".
-   */
-  gapi.analytics.auth.authorize({
-    container: 'embed-api-auth-container',
-    clientid: 'UA-143661681-1'
-  });
-
-
-  /**
-   * Create a new ViewSelector instance to be rendered inside of an
-   * element with the id "view-selector-container".
-   */
-  var viewSelector = new gapi.analytics.ViewSelector({
-    container: 'view-selector-container'
-  });
-
-  // Render the view selector to the page.
-  viewSelector.execute();
-
-
-  /**
-   * Create a new DataChart instance with the given query parameters
-   * and Google chart options. It will be rendered inside an element
-   * with the id "chart-container".
-   */
-  var dataChart = new gapi.analytics.googleCharts.DataChart({
-    query: {
-      metrics: 'ga:sessions',
-      dimensions: 'ga:date',
-      'start-date': '30daysAgo',
-      'end-date': 'yesterday'
-    },
-    chart: {
-      container: 'chart-container',
-      type: 'LINE',
-      options: {
-        width: '100%'
-      }
-    }
-  });
-
-
-  /**
-   * Render the dataChart on the page whenever a new view is selected.
-   */
-  viewSelector.on('change', function(ids) {
-    dataChart.set({query: {ids: ids}}).execute();
-  });
-
-});
-</script>
-  <!-- /main -->
 
   <section class="breadcrumbs">
     <div class="container">
@@ -77,11 +11,75 @@ gapi.analytics.ready(function() {
   <section>
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 mx-auto">
-          <div id="embed-api-auth-container"></div>
-          <div id="chart-container"></div>
-          <div id="view-selector-container"></div>
+        <div class="col-sm-4 mx-auto">
+          <div class="card">
+            <div class="card-body">
+              <form id="form" action="<?=site_url("backend/home/action")?>" autocomplete="off">
+                <div class="form-group">
+                  <label for="">Jumlah Donatur (Orang)</label>
+                  <input type="text" class="form-control" id="jumlah_donatur" name="jumlah_donatur" value="<?=donasi("jumlah_donatur")?>">
+                </div>
+
+                <div class="form-group">
+                  <label for="">Jumlah Donasi (Rp)</label>
+                  <input type="text" class="form-control" id="jumlah_donasi" name="jumlah_donasi" value="<?=donasi("jumlah_donasi")?>">
+                </div>
+
+                <div class="form-group">
+                  <label for="">Jumlah Donasi Tersalurkan (Rp)</label>
+                  <input type="text" class="form-control" id="jumlah_donasi_tersalurkan" name="jumlah_donasi_tersalurkan" value="<?=donasi("jumlah_donasi_tersalurkan")?>">
+                </div>
+
+                <button type="submit" id="submit" class="btn btn-primary btn-sm btn-block" name="submit">Simpan Perubahan</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+
+  <script type="text/javascript">
+    $("#form").submit(function(e){
+        e.preventDefault();
+        var me = $(this);
+        $("#submit").prop('disabled',true)
+                    .text('Memproses...');
+        $('.text-danger').remove();
+        $('.form-control').prop('readonly', true);
+                    $.ajax({
+                          url             : me.attr('action'),
+                          type            : 'post',
+                          data            :  new FormData(this),
+                          contentType     : false,
+                          cache           : false,
+                          dataType        : 'JSON',
+                          processData     :false,
+                          success:function(json){
+                            if (json.success==true) {
+                                $('#alert').hide().fadeIn(200).html(json.alert);
+                                $('.form-group').removeClass('.has-error')
+                                                .removeClass('.has');
+                                  $('.alert').delay(1000).show(10, function(){
+                                    $('.alert').fadeOut(200, function(){
+                                      $('.alert').remove();
+                                      location.href="<?=site_url('backend/home')?>";
+                                    });
+                                  })
+                            }else {
+                              $.each(json.alert, function(key, value) {
+                                var element = $('#' + key);
+                                $("#submit").prop('disabled',false)
+                                            .text('Simpan Perubahan');
+                                $('.form-control').prop('readonly', false);
+                                $(element)
+                                .closest('.form-group')
+                                .find('.text-danger').remove();
+                                $(element).after(value);
+                              });
+                            }
+                          }
+                    });
+    });
+  </script>

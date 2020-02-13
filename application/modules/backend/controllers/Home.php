@@ -17,65 +17,38 @@ class Home extends Backend{
     $this->temp_backend->view('index');
   }
 
-  function table()
-  {
-    $tables = $this->db->list_tables();
-    foreach ($tables as $table)
-    {
-      echo "<a href=".base_url("backend/home/field/$table")." >$table</a></br>";
-    }
-  }
+function action()
+{
+  if ($this->input->is_ajax_request()) {
+      $json = array('success'=>false, 'alert'=>array());
+      $this->form_validation->set_rules("jumlah_donatur","&nbsp;*","trim|xss_clean|numeric|required");
+      $this->form_validation->set_rules("jumlah_donasi","&nbsp;*","trim|xss_clean|numeric|required");
+      $this->form_validation->set_rules("jumlah_donasi_tersalurkan","&nbsp;*","trim|xss_clean|numeric|required");
+      $this->form_validation->set_error_delimiters('<p class="form-text text-danger">','</p>');
+      if ($this->form_validation->run()) {
+        $insert = [
+										'jumlah_donatur'	=>	$this->input->post('jumlah_donatur',true),
+										'jumlah_donasi'	=>	$this->input->post('jumlah_donasi',true),
+										'jumlah_donasi_tersalurkan'	=>	$this->input->post('jumlah_donasi_tersalurkan',true),
+									];
 
-  function field($table)
-  {
+        $this->db->update("donasi_total",$insert,["id"=>1]);
+          $json['alert']   = '<div id="alert" class="alert alert-success">
+                                <i class="fa fa-check"></i> Berhasil Menambahkan.
+                              <div>';
 
-    if ($this->db->table_exists($table))
-        {
-          $fields = $this->db->field_data($table);
-          $data = array();
-          foreach ($fields as $field)
+
+        $json['success'] = true;
+      }else {
+        foreach ($_POST as $key => $value)
           {
-                  $data[]= array(
-                                'primary_key' => $field->primary_key,
-                                'name' => $field->name,
-                                'type' => $field->type,
-                                'max_length' => $field->max_length
-                                );
-                              }
-                              // $data[$i]['name']." - ".$data[$i]['type']." - ".$data[$i]['primary_key']." - ".$data[$i]['max_length']."</br>";
-         for ($i=0; $i <count($data) ; $i++) {
-           $column[] = $data[$i]['name'];
-         }
+            $json['alert'][$key] = form_error($key);
+          }
+      }
 
-         echo implode(',',$column);
-
-        }else{
-          echo "table tidak ditemukan";
-        }
-
+      echo json_encode($json);
   }
-
-  function insert_news()
-  {
-    for ($i=0; $i < 1000; $i++) {
-      $insert = [
-        'title'	=>	"Instead of applying button sizing classes to every button in a group, just add berita $i",
-        'slug'	=>	url_title("berita $i",'dash',true),
-        'description'	=>	"berita $i",
-        'image'	=>	null,
-        'created_at'	=>	date('Y-m-d h:i:s'),
-      ];
-
-        $this->model->get_insert('news',$insert);
-        $news_id = $this->db->insert_id();
-        $insert_trans = [
-                  "id_category" => 2,
-                  "id_news"	=> $news_id
-                ];
-        $this->model->get_insert("trans_news_category",$insert_trans);
-    }
-  }
-
+}
 
 
 

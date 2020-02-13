@@ -41,6 +41,21 @@
                           </div>
                         </div>
 
+
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="">Gambar</label>
+                            <div class="input-group">
+                              <input type="text" class="image" style="display:none" name="image" id="image" value="<?=$image?>">
+                              <a href="<?=base_url()?>temp/img_manager/bank/<?=$image?>" data-fancybox="gallery" id="text-img" class="form-control text-info"><?=$image?></a>
+                              <span class="input-group-btn">
+                              <button class="btn btn-info btn-icon" type="button" id="button-browse" data-url="<?=base_url().'backend/file_manager/'.$this->uri->segment(2)?>" data-toggle="tooltip" data-placement="bottom" title="Browse"><i class="fa fa-image"></i></button>
+                              <button class="btn btn-danger btn-icon" type="button" id="remove-img"  data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="fa fa-close"></i></button>
+                            </span>
+                            </div>
+                          </div>
+                        </div>
+
                   </div>
               </div>
             <div class="card-footer">
@@ -57,6 +72,22 @@
 </section>
 
 <script type="text/javascript">
+$(document).on("click","#remove-img",function(){
+  $("#image").val("");
+  $("#text-img").text("");
+  $("#text-img").attr("href","no");
+})
+
+$(document).on('click','#button-browse',function(e){
+  e.preventDefault();
+  $('.modal-dialog').removeClass('modal-sm')
+                    .removeClass('modal-md')
+                    .addClass('modal-md');
+  $('#modalContent').load($(this).attr('data-url'));
+  $("#modalTitle").text('File manager');
+  $("#modalGue").modal('show');
+});
+
   $("#form").submit(function(e){
       e.preventDefault();
       var me = $(this);

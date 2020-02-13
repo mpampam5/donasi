@@ -21,14 +21,14 @@
               <div class="card-block">
                   <div class="row">
 
-												<div class="col-md-8">
+												<div class="col-md-12">
                           <div class="form-group">
                             <label>Title</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="<?=$title?>">
                           </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                           <div class="form-group">
                             <label>Gambar</label>
                             <div class="input-group">
@@ -40,7 +40,9 @@
                             </span>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
+
+                        <input type="text" class="image" style="display:none" name="image" id="image" value="<?=$image?>">
 
 
 												<div class="col-md-12">

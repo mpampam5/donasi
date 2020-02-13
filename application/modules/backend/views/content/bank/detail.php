@@ -42,10 +42,6 @@
                              <td><?=$image?></td>
                           </tr>
 
-													<tr>
-                             <th>Is Delete</th>
-                             <td><?=$is_delete?></td>
-                          </tr>
 
 												</table>
                      </div>

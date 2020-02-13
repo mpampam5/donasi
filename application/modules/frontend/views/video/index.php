@@ -1,57 +1,37 @@
-  <section>
-    <div class="container">
+<section class="page-title d-flex pt-5" aria-label="Page title" style="background-image: url(<?= base_url() ?>temp/frontend/img/page-title/blog-pattern.jpg);">
+      <div class="container text-left align-self-center pt-5 mt-5">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Beranda</a>
+            </li>
+            <li class="breadcrumb-item"><a href="#">Galery</a>
+            </li>
+            <li class="breadcrumb-item"><a href="#">Video</a>
+            </li>
+          </ol>
+        </nav>
+        <!-- <h1 class="page-title-heading">Detail Artikel</h1> -->
+      </div>
+    </section>
 
-      <div class="row row-5">
-        <?php foreach ($row as $video) : ?>
-          <?php $gambar = str_replace("https://www.youtube.com/watch?v=", "", $video->url); ?>
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="card card-video">
-              <div class="card-img">
-                <a href="<?= $video->url ?>" data-fancybox="gallery">
-                  <img src="https://img.youtube.com/vi/<?= $gambar ?>/maxresdefault.jpg">
-                </a>
-                <!-- <div class="card-meta">
-                <span>4:32</span>
-              </div> -->
-              </div>
-              <div class="card-block">
-                <h4 class="card-title"><a href="<?= $video->url ?>"><?= $video->judul ?></a></h4>
-                <div class="card-meta">
-                  <!-- span><i class="fa fa-clock-o"></i> 2 hours ago</span>
-                <span>423 views</span> -->
-                </div>
-                <!-- <p><?= $video->keterangan ?></p> -->
-              </div>
+<div class="container pb-5">
+      <div class="row">
+        <!-- Project Gallery-->
+        <div class="col-lg-8 mb-3 mx-auto">
+          <div class="row">
+            <?php foreach ($row as $video) : ?>
+              <?php $image_yt = explode("=",$video->url) ?>
+            <div class="col-sm-4 foto-gallery">
+              <a class="gallery-item type-video mb-30" href="<?=$video->url?>&amp;amp;autoplay=1&amp;amp;rel=0&amp;amp;controls=0&amp;amp;showinfo=0" data-fancybox="sideGallery" data-options="{&quot;caption&quot;: &quot;<?= $video->judul ?>&quot;}">
+                <div class="foto-content" style="background-image:url('http://i3.ytimg.com/vi/<?=$image_yt[1]?>/hqdefault.jpg')"></div>
+              </a>
             </div>
+            <?php endforeach ?>
           </div>
-        <?php endforeach ?>
+        </div>
+        <!-- Project Details-->
 
       </div>
+      <!-- Project Share-->
 
-      <!--  <div class="pagination-results m-t-10">
-        <span>Showing 10 to 20 of 48 videos</span>
-        <nav aria-label="Page navigation">
-          <ul class="pagination">
-            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"><i class="fa fa-angle-left"></i></span></a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="separate"><span>...</span></li>
-            <li class="page-item"><a class="page-link" href="#">25</a></li>
-            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true"><i class="fa fa-angle-right"></i></span></a></li>
-          </ul>
-        </nav>
-      </div> -->
     </div>
-  </section>
-
-
-  <script type="text/javascript">
-    $("a.more").fancybox({
-      'titleShow': false,
-      'transitionIn': 'elastic',
-      'transitionOut': 'elastic'
-    });
-  </script>

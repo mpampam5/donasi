@@ -5,6 +5,7 @@
       <h6 class="text-sm font-weight-medium text-white text-uppercase text-center">Kontak Kami</h6>
       <ul class="list-unstyled text-white">
         <li><span class='opacity-60'>Tlp:</span> <?=setting("telepon")?></li>
+        <li><span class='opacity-60'>Whatsapp:</span> <?=setting("whatsapp")?></li>
         <li><span class='opacity-60'>Email:</span> <?=setting("email")?></li>
         <li> <?=setting("alamat")?></li>
       </ul>

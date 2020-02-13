@@ -34,7 +34,28 @@
         <div class="sidebar">
 
 
-
+          <div class="widget widget-tags">
+            <h5 class="widget-title">Donasi Ke </h5>
+            <div class="row">
+              <?php $bank = $this->db->get_where("bank",["is_delete"=>"0"]); ?>
+              <?php foreach ($bank->result() as $key): ?>
+                <div class="col-sm-12 mb-30 pb-2">
+                    <div class="card border">
+                      <div class="card-body">
+                        <img src="<?=base_url("temp/img_manager/bank/thumbs/$key->image")?>" width="200" alt="">
+                        <p class="card-text text-sm text-center">
+                          <ul style="list-style:none">
+                            <li>BANK : <?=strtoupper($key->bank)?></li>
+                            <li>NO.REK : <?=$key->no_rek?></li>
+                            <li>NAMA REK : <?=strtoupper($key->nama_rek)?></li>
+                          </ul>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+              <?php endforeach; ?>
+            </div>
+          </div>
           <!-- widget tags -->
           <div class="widget widget-tags">
             <h5 class="widget-title">Category</h5>

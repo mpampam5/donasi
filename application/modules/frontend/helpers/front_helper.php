@@ -9,6 +9,16 @@ function setting($field)
 
 //WIDGET
 
+function donasi($field){
+  $ci=get_instance();
+  $row = $ci->db->get_where("donasi_total",["id"=>1])->row();
+  return $row->$field;
+}
+
+function format_rupiah($int)
+  {
+    return number_format($int, 0, ',', '.');
+  }
 
 function widget_video($title, $limit)
 {
@@ -69,6 +79,54 @@ function get_menu()
   }
 
   $str .= '</ul>';
+
+  return $str;
+}
+
+
+function get_menu_mobile()
+{
+  $ci = &get_instance();
+  $menu = $ci->db->select('id,name,url,sort,type,is_active')
+    ->from("menu_public")
+    ->where("is_active", 1)
+    ->where("is_parent", 0)
+    ->order_by("sort", "asc")
+    ->get();
+  $str = "";
+  foreach ($menu->result() as $menus) {
+    $sub_menu = $ci->db->select('id,name,url,sort,type,is_active')
+      ->from("menu_public")
+      ->where("is_active", 1)
+      ->where("is_parent", $menus->id)
+      ->order_by("sort", "asc")
+      ->get();
+    if ($sub_menu->num_rows() > 0) {
+      $str .= '<div class="card">
+                  <div class="card-header">';
+      $str .= '<a href="#" class="mobile-menu-link">' . $menus->name . '</a>
+              <a class="collapsed" href="#account-submenu" data-toggle="collapse"></a>
+              ';
+      $str .= '</div>
+                <div class="collapse" id="account-submenu" data-parent="#accordion-menu">
+                  <div class="card-body">
+                <ul>';
+      foreach ($sub_menu->result() as $sub_menus) {
+        $str .= '<li class="dropdown-item"><a href="' . site_url($sub_menus->url) . '" target="' . $sub_menus->type . '">' . $sub_menus->name . '</a></li>';
+      }
+      $str .= '</ul>
+                  </div>
+                </div>
+              </div>';
+    } else {
+      $str .= '<div class="card">
+                  <div class="card-header">
+                    <a class="mobile-menu-link" href="' . site_url($menus->url) . '" target="' . $menus->type . '">' . $menus->name . '</a>
+                  </div>
+                </div>';
+    }
+  }
+
 
   return $str;
 }

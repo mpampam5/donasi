@@ -6,7 +6,7 @@
         <div class="col-xl-7 col-lg-8"><img class="d-block" src="<?=base_url()?>temp/frontend/img/hero-img.png" alt="Hero Image"></div>
         <div class="col-lg-4 pt-xl-5">
           <div class="px-3 px-lg-0 text-center text-lg-left">
-            <h1 class="pt-md-5 pb-md-4 pt-3 pb-3 pt-md-0 pb-md-5">Tahfidz <br>Al-Quran</h1><a class="scroll-to btn btn-style-4 btn-gradient btn-icon-right btn-lg" href="#services">Donasi<i class="fe-icon-arrow-down"></i></a>
+            <h1 class="pt-md-5 pb-md-4 pt-3 pb-3 pt-md-0 pb-md-5">Tahfidz <br>Al-Quran</h1><a class="scroll-to btn btn-style-4 btn-gradient btn-icon-right btn-lg" href="<?=site_url("donasi")?>">Donasi<i class="fe-icon-arrow-down"></i></a>
           </div>
         </div>
       </div>
@@ -15,21 +15,21 @@
     <section class="bg-white container-fluid border-top">
       <div class="row">
         <div class="col-md-4 col-sm-6 border-right py-5 border-bottom">
-          <div class="animated-digits mx-auto text-center" data-number="350">
-            <h5 class="animated-digits-digit"><span>0</span></h5>
+          <div class="animated-digits mx-auto text-center" data-number="<?=donasi("jumlah_donatur")?>">
+            <h5 class="animated-digits-digit" style="font-size:22px"><span><?=donasi("jumlah_donatur")?></span> Orang</h5>
             <p class="animated-digits-text">Total Donatur</p>
           </div>
         </div>
         <div class="col-md-4 col-sm-6 py-5 border-right border-bottom">
-          <div class="animated-digits mx-auto text-center" data-number="5000000">
-            <h5 class="animated-digits-digit">Rp.<span>5000000</span></h5>
+          <div class="animated-digits mx-auto text-center" >
+            <h5 class="animated-digits-digit" style="font-size:22px">Rp.<span><?=format_rupiah(donasi("jumlah_donasi"))?></span></h5>
             <p class="animated-digits-text">Jumlah Donasi</p>
           </div>
         </div>
         <div class="col-md-4 col-sm-6 py-5 border-right border-bottom">
-          <div class="animated-digits mx-auto text-center" data-number="0">
-            <h5 class="animated-digits-digit">Rp.<span>0</span></h5>
-            <p class="animated-digits-text">Donasi Terpakai</p>
+          <div class="animated-digits mx-auto text-center">
+            <h5 class="animated-digits-digit" style="font-size:22px">Rp.<span><?=format_rupiah(donasi("jumlah_donasi_tersalurkan"))?></span></h5>
+            <p class="animated-digits-text">Donasi Tersalurkan</p>
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
                     &nbsp;<?=$donaturs->name?>
                   </span>
                   <span class="featured-product-price">
-                    &nbsp;Rp.<?=$donaturs->donasi?>
+                    &nbsp;Rp.<?=format_rupiah($donaturs->donasi)?>
                   </span>
                 </div>
               </a>
@@ -70,35 +70,25 @@
         <div class="col-md-6 col-sm-6">
           <div class="widget widget-featured-products">
             <h3 class="widget-title">Donasi Ke</h3>
-            <a class="featured-product" href="shop-single.html">
-              <div class="featured-product-thumb" style="width:180px!important">
-                <img src="https://localhost/idea-donasi-ambulans/template/images/bank/blog_5dd50ecf246724_79179282.png" style="box-shadow:none!important" alt="Product Image">
-              </div>
-              <div class="featured-product-info">
-                <h5 class="featured-product-title">BANK BRI</h5>
-                <span class="featured-product-price">
-                  &nbsp;IDEA DIGITAL INDONESIA
-                </span>
-                <span class="featured-product-price">
-                  &nbsp;NO.REK 0333000303
-                </span>
-              </div>
-            </a>
-
-            <a class="featured-product" href="shop-single.html">
-              <div class="featured-product-thumb" style="width:180px!important;">
-                <img src="https://localhost/idea-donasi-ambulans/template/images/bank/mandiri.png" style="box-shadow:none!important" alt="Product Image">
-              </div>
-              <div class="featured-product-info">
-                <h5 class="featured-product-title">BANK MANDIRI</h5>
-                <span class="featured-product-price">
-                  &nbsp;IDEA DIGITAL INDONESIA
-                </span>
-                <span class="featured-product-price">
-                  &nbsp;NO.REK 0333000303
-                </span>
-              </div>
-            </a>
+            <div class="row">
+              <?php $bank = $this->db->get_where("bank",["is_delete"=>"0"]); ?>
+              <?php foreach ($bank->result() as $key): ?>
+                <div class="col-sm-6 mb-30 pb-2">
+                    <div class="card border">
+                      <div class="card-body">
+                        <img src="<?=base_url("temp/img_manager/bank/thumbs/$key->image")?>" width="200" alt="">
+                        <p class="card-text text-sm text-center">
+                          <ul style="list-style:none">
+                            <li>BANK : <?=strtoupper($key->bank)?></li>
+                            <li>NO.REK : <?=$key->no_rek?></li>
+                            <li>NAMA REK : <?=strtoupper($key->nama_rek)?></li>
+                          </ul>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+              <?php endforeach; ?>
+            </div>
 
 
           </div>
@@ -113,7 +103,7 @@
         <div class="row justify-content-center pt-3">
           <div class="col-xl-7 col-lg-8 col-md-10">
             <p class="text-white opacity-20" style="font-size:18px;">
-              Muliakan Hafidz Quran adalah program pemberian beasiswa kepada santri penghafal Al-Quran yang ada di [............] . Santri penghafal Al-Quran mendapat pendampingan dan pembinaan langsung dari da’i atau guru mengaji yang sudah terjamin kualitas pengajarannya.
+              Muliakan Hafidz Quran adalah program pemberian beasiswa kepada santri penghafal Al-Quran yang ada di Pondok Pesantren/Rumah Tahfidz . Santri penghafal Al-Quran mendapat pendampingan dan pembinaan langsung dari da’i atau guru mengaji yang sudah terjamin kualitas pengajarannya.
             </p>
           </div>
         </div>

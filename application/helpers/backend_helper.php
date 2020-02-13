@@ -23,6 +23,13 @@ function setting($field){
   return $row->$field;
 }
 
+
+function donasi($field){
+  $ci=get_instance();
+  $row = $ci->db->get_where("donasi_total",["id"=>1])->row();
+  return $row->$field;
+}
+
 function cmb_menu($id="")
 {
   $ci =get_instance();

@@ -1,18 +1,19 @@
-<section class="hero hero-game" style="background-image: url('<?= base_url() ?>temp/front/banner-news.jpg');">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="hero-block text-center">
-      <div class="hero-center">
-        <h2 class="hero-title"><?= $row->title ?></h2>
-      </div>
-    </div>
+<section class="page-title d-flex bg-dark" aria-label="Page title" style="background-image: url(<?=base_url()?>temp/frontend/img/pages/help-hero-bg.jpg);position:relative">
+  <div class="container text-left align-self-center">
+    <h3 class="page-title-heading text-white" style="font-size:26px;position:absolute;bottom:10px;"><?= $row->title ?></h3>
   </div>
 </section>
 
-<section>
-  <div class="container">
-    <p style="color: grey; font-size: 20px;" class="p-l-100 p-r-100">
-      <!-- <?= $row->deskripsi ?> -->
-    </p>
-  </div>
-</section>
+<section class="container pb-5 mb-2">
+      <div class="row">
+        <!-- Content-->
+        <div class="col-xl-12 col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                  <?= $row->deskripsi ?>
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </section>

@@ -124,6 +124,12 @@ $route['news/detail/(:num)/(:any)'] = "frontend/news/detail/$1/$2";
 //contact
 $route['contact'] = "frontend/contact";
 $route['contact/add'] = "frontend/contact/add";
+//donasi/
+$route['donasi'] = "frontend/donasi";
+$route['donasi/action'] = "frontend/donasi/action";
+
+$route['donatur'] = "frontend/donatur";
+$route['donatur/json'] = "frontend/donatur/json";
 
 $route['video'] = "frontend/video";
 $route['about'] = "frontend/about";
